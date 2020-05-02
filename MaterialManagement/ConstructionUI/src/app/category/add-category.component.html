@@ -1,0 +1,90 @@
+<div [ngClass]="{'wrapper' : currentUser}">
+    <!-- <div class="wrapper"> -->
+    <!-- Navbar -->
+    <app-header *ngIf="currentUser"></app-header>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <app-sidebar *ngIf="currentUser"></app-sidebar>
+    <!-- Content Wrapper. Contains page content -->
+
+    <div [ngClass]="{'content-wrapper' : currentUser}">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Category</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/categoryList">Category List</a></li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">{{categoryLabel}}</h3>                                
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+                                <div class="card-body col-md-9">                                    
+                                    <div class="input-group mb-3">
+                                        <!-- <input type="email" class="form-control" placeholder="Email"> -->
+                                        <input type="text" formControlName="categoryname" class="form-control"
+                                            placeholder="category name"
+                                            [ngClass]="{ 'is-invalid': submitted && f.categoryname.errors }" />
+                                        <!-- <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-envelope"></span>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <!-- <input type="password" class="form-control" placeholder="Password"> -->
+                                        <input type="text" formControlName="categorydesc" placeholder="category desc"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.categorydesc.errors }" />
+                                        <!-- <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <!-- <button type="submit" class="btn btn-primary btn-block">Sign In</button> -->
+                                        <div class="form-group">
+                                            <button [disabled]="loading" class="btn btn-primary">
+                                                <span *ngIf="loading"
+                                                    class="spinner-border spinner-border-sm mr-1"></span>
+                                                    {{categorybtn}} Category
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <alert></alert>
+                                        </div>                                        
+                                    </div>
+                                    <!-- <div>
+                                        <span *ngIf="result">{{responseMessage}}</span>
+                                    </div> -->
+                                </div>                             
+                                
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside [ngClass]="{'control-sidebar control-sidebar-dark' : currentUser}">
+    </aside>
+</div>

@@ -1,0 +1,185 @@
+<div [ngClass]="{'wrapper' : currentUser}">
+    <!-- <div class="wrapper"> -->
+    <!-- Navbar -->
+    <app-header *ngIf="currentUser"></app-header>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <app-sidebar *ngIf="currentUser"></app-sidebar>
+    <!-- Content Wrapper. Contains page content -->
+
+    <div [ngClass]="{'content-wrapper' : currentUser}">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Product</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/productList">Product List</a></li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">{{productLabel}}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                                <div class="card-body col-md-9">
+
+                                    <div class="input-group mb-3">
+                                        <select id="categoryname" name="categoryname" formControlName="categoryname"
+                                            class="form-control" [ngClass]="{ 'is-invalid': categorynamesubmitted }"
+                                            (change)="onChange($event.target.value)">
+                                            <option value="select">Select Category</option>
+                                            <option *ngFor="let item of categorylist" [value]="item.categoryname">
+                                                {{item.categoryname}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="productname" class="form-control"
+                                            placeholder="product name"
+                                            [ngClass]="{ 'is-invalid': submitted && f.productname.errors }" />
+                                    </div>
+                                    <div>
+
+                                    </div>
+
+                                    <div class="input-group mb-3"
+                                        *ngIf="this.productForm.get('categoryname').value.toLowerCase().includes('iron')">
+                                        <select id="productsize" name="productsize" formControlName="productsize"
+                                            class="form-control" [ngClass]="{ 'is-invalid': unitofmeasuresubmitted }">
+                                            <option value="0">Select Size </option>
+                                            <option value="1">1 MM </option>
+                                            <option value="2">2 MM</option>
+                                            <option value="3">3 MM</option>
+                                            <option value="4">4 MM</option>
+                                            <option value="5">5 MM </option>
+                                            <option value="6">6 MM </option>
+                                            <option value="7">7 MM </option>
+                                            <option value="8">8 MM</option>
+                                            <option value="9">9 MM </option>
+                                            <option value="10">10 MM</option>
+                                            <option value="11">11 MM </option>
+                                            <option value="12">12 MM</option>
+                                            <option value="13">13 MM</option>
+                                            <option value="14">14 MM</option>
+                                            <option value="15">15 MM</option>
+                                            <option value="16">16 MM</option>
+                                            <option value="17">17 MM</option>
+                                            <option value="18">18 MM</option>
+                                            <option value="19">19 MM</option>
+                                            <option value="20">20 MM</option>
+                                            <option value="30">30 MM</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <select id="unitofmeasure" name="unitofmeasure" formControlName="unitofmeasure"
+                                            class="form-control" [ngClass]="{ 'is-invalid': unitofmeasuresubmitted }"
+                                            (change)="onChangeUnit($event)">
+                                            <option value="0">Select UOM</option>
+                                            <option value="1">Gram</option>
+                                            <option value="2">Kilogram </option>
+                                            <option value="3">Quintal</option>
+                                            <option value="4">Tone</option>
+                                            <option value="5">Packet</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="quantity" placeholder="{{weight}}"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }" />
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="price1" placeholder="price1"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.price1.errors }" />
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="price2" placeholder="price2"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.price2.errors }" />
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="price3" placeholder="price3"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.price3.errors }" />
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="purchaseprice" placeholder="purchaseprice"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.purchaseprice.errors }" />
+                                    </div>                                    
+                                    <div class="input-group mb-3" *ngIf="showHideBrand">
+                                        <select id="brandName" name="brandName" formControlName="brandName"
+                                            class="form-control" [ngClass]="{ 'is-invalid': brandName }" *ngIf="showHideBrand">
+                                            <option value="0">Select Brand</option>
+                                            <option *ngFor="let item of brandlist" [value]="item.brandname">
+                                                {{item.brandname}}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <select id="suppliername" name="suppliername" formControlName="suppliername"
+                                            class="form-control" [ngClass]="{ 'is-invalid': suppliernamesubmitted }">
+                                            <option value="0">Select Supplier</option>
+                                            <option *ngFor="let item of supplierlist" value="{{item.suppliername}}_{{item.companyname}}">
+                                                {{item.suppliername}}
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <!-- <div class="input-group mb-3">
+                                        <select id="suppliername" name="suppliername" formControlName="suppliername"
+                                            class="form-control" [ngClass]="{ 'is-invalid': suppliernamesubmitted }">
+                                            <option value="0">Select Supplier</option>
+                                            <option value="1">ABC </option>
+                                            <option value="4">SKJ</option>
+                                            <option value="2">Heera</option>
+                                            <option value="3">TATA</option>
+                                        </select>
+                                    </div> -->
+
+
+                                    <div class="input-group mb-3">
+                                        <div class="form-group">
+                                            <button [disabled]="loading" class="btn btn-primary">
+                                                <span *ngIf="loading"
+                                                    class="spinner-border spinner-border-sm mr-1"></span>
+                                                {{productbtn}} Product
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <alert></alert>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside [ngClass]="{'control-sidebar control-sidebar-dark' : currentUser}">
+    </aside>
+</div>

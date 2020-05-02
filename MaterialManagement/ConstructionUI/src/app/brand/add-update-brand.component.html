@@ -1,0 +1,72 @@
+<div [ngClass]="{'wrapper' : currentUser}">
+    <!-- <div class="wrapper"> -->
+    <!-- Navbar -->
+    <app-header *ngIf="currentUser"></app-header>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <app-sidebar *ngIf="currentUser"></app-sidebar>
+    <!-- Content Wrapper. Contains page content -->
+
+    <div [ngClass]="{'content-wrapper' : currentUser}">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Supplier</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/brandList">Brand List</a></li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">{{brandLabel}}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form [formGroup]="brandForm" (ngSubmit)="onSubmit()">
+                                <div class="card-body col-md-9">
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="brandname" class="form-control"
+                                            placeholder="Brand Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f.brandname.errors }" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" formControlName="branddescription" placeholder="Brand Description"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.branddescription.errors }" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="form-group float-left">
+                                            <button [disabled]="loading" class="btn btn-primary">
+                                                <span *ngIf="loading"
+                                                    class="spinner-border spinner-border-sm mr-1"></span>
+                                                {{brandbtn}} Brand
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="float-left"></div>
+                                    <div class="float-right">
+                                        <alert></alert>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <aside [ngClass]="{'control-sidebar control-sidebar-dark' : currentUser}">
+    </aside>
+</div>

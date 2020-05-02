@@ -1,0 +1,136 @@
+<div [ngClass]="{'wrapper' : currentUser}">
+    <!-- <div class="wrapper"> -->
+    <!-- Navbar -->
+    <app-header *ngIf="currentUser"></app-header>
+    <!-- /.navbar -->
+    <!-- Main Sidebar Container -->
+    <app-sidebar *ngIf="currentUser"></app-sidebar>
+    <!-- Content Wrapper. Contains page content -->
+
+    <div [ngClass]="{'content-wrapper' : currentUser}">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Supplier</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/addSupplier/0">Add Supplier</a></li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-12">
+
+                        <!-- /.card -->
+                        <div class="card">
+                            <!-- <div class="card-header">
+                                <h3 class="card-title">DataTable with default features</h3>
+                            </div> -->
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <label>Search</label>
+                                <input type="text" [(ngModel)]="searchTxt" class="form-control" name="searchTxt"
+                                    placeholder="search name">
+                                <div class="table-responsive table-striped">
+                                    <table class="table" [mfData]="supplierlist | search:searchTxt" #mf="mfDataTable"
+                                        [mfRowsOnPage]="15">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="suppliername">Name</mfDefaultSorter>
+                                                </th>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="mobile">Mobile</mfDefaultSorter>
+                                                </th>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="address">Address</mfDefaultSorter>
+                                                </th>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="fulladdresss">Full Addresss</mfDefaultSorter>
+                                                </th>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="emailid">Email</mfDefaultSorter>
+                                                </th>
+                                                <th style="width: 15%">
+                                                    <mfDefaultSorter by="companyname">Company Name</mfDefaultSorter>
+                                                </th>
+                                                <th colspan="2">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="mf.data?.length == 0">
+                                                <td colspan="8" align="center">No Data Found</td>
+                                            </tr>
+                                            <tr *ngFor="let item of mf.data">
+                                                <ng-container *ngIf="item == -1">
+                                                    <td colspan="8" align="center">No Data Found</td>
+                                                </ng-container>
+                                                <ng-container *ngIf="item!=-1">
+                                                    <th>{{ item.suppliername}}</th>
+                                                    <td>{{ item.mobile}}</td>
+                                                    <td>{{ item.address}}</td>
+                                                    <td>{{ item.fulladdresss}}</td>
+                                                    <td>{{ item.emailid}}</td>
+                                                    <td>{{ item.companyname}}</td>
+                                                    <td><a style="cursor: pointer; color: #5858d6;"
+                                                            (click)="editSupplier(item._id)"><i
+                                                                class="far fa-edit"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a style="cursor: pointer; color: #5858d6;"
+                                                            mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                                                            [popoverMessage]="popoverMessage" placement="left"
+                                                            (confirm)="deleteSupplier(item._id)"
+                                                            (cancel)="cancelClicked = true">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a>
+                                                    </td>
+                                                </ng-container>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="8">
+                                                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]">
+                                                    </mfBootstrapPaginator>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+
+
+
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <aside [ngClass]="{'control-sidebar control-sidebar-dark' : currentUser}">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+</div>

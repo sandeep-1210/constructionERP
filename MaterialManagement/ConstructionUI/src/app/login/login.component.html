@@ -1,0 +1,69 @@
+<div class="jumbotron" *ngIf="currentUser == null" style="margin: 0px 0px 0px 0px;padding: 0px 0px 0px 0px;">
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <alert></alert>
+                <div class="hold-transition login-page">
+                    <div class="login-box" style="margin-top:0px;margin-bottom: 0px;">
+                        <div class="login-logo">
+                            <a href=""><b>Admin</b>Construction</a>
+                        </div>
+                        <!-- /.login-logo -->
+                        <div class="card">
+                            <div class="card-body login-card-body">
+                                <p class="login-box-msg">Sign in to start your session</p>
+                                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                    <div class="input-group mb-3">
+                                        <!-- <input type="email" class="form-control" placeholder="Email"> -->
+                                        <input type="text" formControlName="username" class="form-control"
+                                            placeholder="username"
+                                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-envelope"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <!-- <input type="password" class="form-control" placeholder="Password"> -->
+                                        <input type="password" formControlName="password" placeholder="Password"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <!-- /.col -->
+                                        <div class="col-6">
+                                            <!-- <button type="submit" class="btn btn-primary btn-block">Sign In</button> -->
+                                            <div class="form-group">
+                                                <button [disabled]="loading" class="btn btn-primary">
+                                                    <span *ngIf="loading"
+                                                        class="spinner-border spinner-border-sm mr-1"></span>
+                                                    Sign In
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </form>
+                                <!-- /.social-auth-links -->
+                                <p class="mb-1">
+                                    <a href="">Forgot Password</a>
+                                </p>
+                                <p class="mb-0">
+                                    <a href="" class="text-center">Register</a>
+                                </p>
+                            </div>
+                            <!-- /.login-card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
